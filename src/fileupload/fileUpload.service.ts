@@ -10,14 +10,29 @@ export class FileUploadService {
   });
 
   async uploadFile(file: Express.Multer.File) {
-    const uploadedFile = await this.s3
-      .upload({
-        Bucket: process.env.AWS_BUCKET_NAME,
-        Body: file.buffer,
-        Key: uuid(),
-      })
-      .promise();
+    let retries = 0;
+    const fileResponse: AWS.S3.ManagedUpload.SendData = await new Promise(
+      (resolve, reject) => {
+        const uploadFileToS3 = async () => {
+          try {
+            const uploadedFile = await this.s3
+              .upload({
+                Bucket: process.env.AWS_BUCKET_NAME,
+                Body: file.buffer,
+                Key: uuid(),
+              })
+              .promise();
+            resolve(uploadedFile);
+          } catch (error) {
+            retries++;
+            if (retries <= 2) uploadFileToS3();
+            else reject(error);
+          }
+        };
+        uploadFileToS3();
+      },
+    );
 
-    return uploadedFile.Location;
+    return fileResponse?.Location;
   }
 }
