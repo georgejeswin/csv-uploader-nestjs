@@ -5,27 +5,8 @@ git clone https://github.com/georgejeswin/csv-uploader-nestjs.git
 
 Install all the peer dependencies by running "npm i"
 
-Add environment variables and setup database, aws bucket, jwt variables
+Add environment variables and setup database, aws bucket, jwt variables(format in .sample.env file)
 
-PORT=
-BASE_URL=
-JWT_ACCESS_SECRET=
-JWT_REFRESH_SECRET=
-JWT_EXPIRES_IN_HOURS=
-JWT_REFRESH_EXPIRY=
-
-DATABASE_HOST=
-DATABASE_NAME=
-DATABASE_USER=
-DATABASE_PASSWORD=
-DATABASE_PORT=
-
-BCRYPT_SALT=
-
-#AWS
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-AWS_BUCKET_NAME=
 
 Run the project by running "npm start" or "npm run start:dev"
 
