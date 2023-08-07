@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FileUploadService } from 'src/fileupload/fileUpload.service';
 import { Uploads as UploadsEntity } from 'src/typeorm/entities/upload.entity';

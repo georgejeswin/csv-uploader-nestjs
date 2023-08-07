@@ -15,7 +15,7 @@ import { UploadsService } from 'src/uploads/services/uploads/uploads.service';
 import { UsersService } from 'src/users/services/users/users.service';
 
 @Controller('upload')
-export class UploadssController {
+export class UploadsController {
   constructor(
     private uploadService: UploadsService,
     private userService: UsersService,

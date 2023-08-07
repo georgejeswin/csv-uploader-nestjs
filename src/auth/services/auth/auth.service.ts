@@ -57,20 +57,6 @@ export class AuthService {
     });
   }
 
-  async refreshTokens(userId: string, refreshToken: string) {
-    const user = await this.userService.findUserById(userId);
-    if (!user || !user.refresh_token)
-      throw new ForbiddenException('Access Denied');
-    const refreshTokenMatches = comparePassword(
-      refreshToken,
-      user?.refresh_token,
-    );
-    if (!refreshTokenMatches) throw new ForbiddenException('Access Denied');
-    const tokens = await this.getTokens(user.id, user.username);
-    await this.updateRefreshToken(user.id, tokens.refresh_token);
-    return tokens;
-  }
-
   async getTokens(userId: string, username: string) {
     const [access_token, refresh_token] = await Promise.all([
       this.jwtService.signAsync(
@@ -115,9 +101,5 @@ export class AuthService {
       console.error('Error login user: ', error);
       return null;
     }
-  }
-
-  async logout(userId: string) {
-    this.userService.updateUser(userId, { refreshToken: null });
   }
 }

@@ -12,13 +12,6 @@ export class UsersService {
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
   ) {}
-  async findAllUsers() {
-    try {
-      return this.userRepository.find();
-    } catch (error) {
-      console.error('Find all users failed', error);
-    }
-  }
 
   async findUserById(id: string): Promise<User> {
     try {
